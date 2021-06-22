@@ -1,0 +1,18 @@
+{"intents":
+[
+    {"tag": "greeting",
+    "patterns": ["Hey", "Hello", "Alexa", "Jarvis"],
+    "responses": ["Hello sir!, What can i do for you?"]},
+    {"tag": "create_file",
+    "patterns": ["Please create a file", "new file", "create a file", "create a new file"],
+    "responses": [""]},
+    {"tag": "update_file",
+    "patterns": ["I want to update a file", "update a file", "update a file in my directory", "update file"],
+    "responses": [""]},
+    {"tag": "show_files",
+    "patterns": ["show my files", "what are my files", "what is on my files directory"],
+    "responses": [""]},
+    {"tag": "exit",
+    "patterns": ["bye", "stop", "quit", "i want to quit", "exit", "I want to exit"],
+    "responses": [""]}
+]}
