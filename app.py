@@ -1,9 +1,12 @@
 from neuralintents import GenericAssistant
 import speech_recognition as sr
+from tkinter import messagebox
 import pyttsx3
 from os import path
 import sys
-import glob
+# import design
+# import glob
+
 
 """VOICE"""
 engine = pyttsx3.init('sapi5')
@@ -15,13 +18,16 @@ engine.setProperty('volume', 1.0)    # setting up volume level  between 0 and 1
 
 recognizer = sr.Recognizer()
 
+# c.close()
+# conn.close()
+
 
 '''Create file'''
 
 
 def create_file():
     global recognizer
-
+    print("Bot: What do you want to write onto your file?")
     engine.say("What do you want to write onto your file?")
     engine.runAndWait()
 
@@ -30,26 +36,29 @@ def create_file():
     while not done:
         try:
             with sr.Microphone() as mic:
+                recognizer.pause_threshold = 0.6
                 recognizer.adjust_for_ambient_noise(mic)
                 audio = recognizer.listen(mic)
 
                 note = recognizer.recognize_google(audio, language='en-in')
                 note = note.lower()
+                print(f"Me: {note}")
 
                 exist = False
-
+                print("Bot: choose a file name!")
                 engine.say("choose a file name!")
                 engine.runAndWait()
 
                 while not exist:
                     try:
-
+                        recognizer.pause_threshold = 0.6
                         recognizer.adjust_for_ambient_noise(mic)
                         audio = recognizer.listen(mic)
 
                         file_name = recognizer.recognize_google(
                             audio, language='en-in')
                         file_name = file_name.lower() + '.txt'
+                        print(f"Me: {file_name}")
                         file_present = path.exists(f"files/{file_name}")
 
                         if file_present == False:
@@ -58,6 +67,8 @@ def create_file():
                                 f.write(note)
                                 done = True
                                 exist = True
+                                print(
+                                    f"Bot: I succesfully created the file {file_name}")
                                 engine.say(
                                     f"I succesfully created the file {file_name}")
                                 engine.runAndWait()
@@ -65,17 +76,23 @@ def create_file():
                                 # add file name to the database
 
                         else:
+                            print(
+                                "Bot: Sorry file already exist!! Choose another file name.")
                             engine.say(
                                 "Sorry file already exist!! Choose another file name.")
                             engine.runAndWait()
 
                     except sr.UnknownValueError:
                         recognizer = sr.Recognizer()
+                        print(
+                            'Bot: I did not understant you! Please try again!')
                         engine.say(
                             'I did not understant you! Please try again!')
                         engine.runAndWait()
         except sr.UnknownValueError:
             recognizer = sr.Recognizer()
+            print(
+                'Bot: I did not understant you! Please try again!')
             engine.say(
                 'I did not understant you! Please try again!')
             engine.runAndWait()
@@ -94,6 +111,7 @@ def update_file():
     while not done:
         try:
             with sr.Microphone() as mic:
+                recognizer.pause_threshold = 0.6
                 recognizer.adjust_for_ambient_noise(mic)
                 audio = recognizer.listen(mic)
 
@@ -125,6 +143,7 @@ def show_files():
 
 def greetings():
     # print('hello')
+    print('Bot: Hello sir, what i can do for you?')
     engine.say('Hello sir, what i can do for you?')
     engine.runAndWait()
 
@@ -133,6 +152,8 @@ def greetings():
 
 
 def quit():
+
+    print('Bot: See you soon, have a nice day!!')
     engine.say('See you soon, have a nice day!!')
     engine.runAndWait()
     sys.exit(0)
@@ -147,22 +168,31 @@ mappings = {
 }
 
 
-assistant = GenericAssistant(
-    'data/intents.json', intent_methods=mappings)
-# assistant.train_model()
-# assistant.save_model(model_name="data/test_model")
-assistant.load_model(model_name="data/test_model")
+def my_assistant():
 
-while True:
-    try:
-        with sr.Microphone() as mic:
-            recognizer.adjust_for_ambient_noise(mic)
-            print("Speak: ", end=" ")
-            audio = recognizer.listen(mic)
+    global recognizer
 
-            message = recognizer.recognize_google(audio, language='en-in')
-            message = message.lower()
+    assistant = GenericAssistant(
+        'data/intents.json', intent_methods=mappings)
+    # assistant.train_model()
+    # assistant.save_model(model_name="data/test_model")
+    assistant.load_model(model_name="data/test_model")
 
-        assistant.request(message)
-    except sr.UnknownValueError:
-        recognizer = sr.Recognizer()
+    while True:
+        try:
+            with sr.Microphone() as mic:
+                recognizer.pause_threshold = 0.6
+                recognizer.adjust_for_ambient_noise(mic)
+                print("Speak: ")
+                audio = recognizer.listen(mic)
+
+                message = recognizer.recognize_google(audio, language='en-in')
+                message = message.lower()
+                print(f"Me: {message}")
+
+            assistant.request(message)
+        except sr.UnknownValueError:
+            recognizer = sr.Recognizer()
+
+
+# my_assistant()

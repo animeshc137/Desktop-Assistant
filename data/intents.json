@@ -1,7 +1,7 @@
 {"intents":
 [
     {"tag": "greeting",
-    "patterns": ["Hey", "Hello", "Alexa", "Jarvis"],
+    "patterns": ["Hey", "Hello", "Alexa", "Jarvis", "Hello, good morning!"],
     "responses": ["Hello sir!, What can i do for you?"]},
     {"tag": "create_file",
     "patterns": ["Please create a file", "new file", "create a file", "create a new file"],
