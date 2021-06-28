@@ -144,7 +144,7 @@ def signup_clicked():
 
 def logout_clicked():
     hide_show.show_cover(window, canvas, bot, start_btn, backBtn, username_entry, password_entry, loginBtn, signup_link, signupBtn,
-                         login_link, reg_username_entry, reg_email_entry, reg_password_entry, hero_title, update_img, delete_img, read_img, create_img, logoutBtn)
+                         login_link, reg_username_entry, reg_email_entry, reg_password_entry, hero_title, update_img, delete_img, read_img, create_img, logoutBtn, micBtn)
 
 
 def contribute_github(event):
@@ -165,7 +165,7 @@ start_btn.place(x=435, y=290)
 
 back_btn = ImageTk.PhotoImage(file="images/back.png")
 backBtn = Button(image=back_btn, borderwidth=0,
-                 highlightthickness=0, relief="flat", activebackground='#fff', background='#fff', cursor="hand2", command=lambda: hide_show.show_cover(window, canvas, bot, start_btn, backBtn, username_entry, password_entry, loginBtn, signup_link, signupBtn, login_link, reg_username_entry, reg_email_entry, reg_password_entry, hero_title, update_img, delete_img, read_img, create_img, logoutBtn))
+                 highlightthickness=0, relief="flat", activebackground='#fff', background='#fff', cursor="hand2", command=lambda: hide_show.show_cover(window, canvas, bot, start_btn, backBtn, username_entry, password_entry, loginBtn, signup_link, signupBtn, login_link, reg_username_entry, reg_email_entry, reg_password_entry, hero_title, update_img, delete_img, read_img, create_img, logoutBtn, micBtn))
 
 login_btn = ImageTk.PhotoImage(file="images/login_btn.png")
 loginBtn = Button(image=login_btn, borderwidth=0,

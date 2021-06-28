@@ -29,7 +29,7 @@ def show_login(window, canvas, bot, start_btn, backBtn, username_entry, password
     reg_password_entry.place_forget()
 
 
-def show_cover(window, canvas, bot, start_btn, backBtn, username_entry, password_entry, loginBtn, signup_link, signupBtn, login_link, reg_username_entry, reg_email_entry, reg_password_entry, hero_title, update_img, delete_img, read_img, create_img, logoutBtn):
+def show_cover(window, canvas, bot, start_btn, backBtn, username_entry, password_entry, loginBtn, signup_link, signupBtn, login_link, reg_username_entry, reg_email_entry, reg_password_entry, hero_title, update_img, delete_img, read_img, create_img, logoutBtn, micBtn):
 
     window.title("Desktop Assistant")
     bot.place(x=335, y=355)
@@ -64,6 +64,7 @@ def show_cover(window, canvas, bot, start_btn, backBtn, username_entry, password
     canvas.delete('ball_5')
     canvas.delete('ball_6')
     logoutBtn.place_forget()
+    micBtn.place_forget()
 
 
 def show_signup(window, canvas, username_entry, password_entry, loginBtn, signup_link, signupBtn, login_link, reg_username_entry, reg_email_entry, reg_password_entry, username_img, email, password_img, signup_heading):
