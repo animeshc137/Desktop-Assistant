@@ -5,6 +5,7 @@ import webbrowser
 from PIL import Image, ImageTk
 import hide_show
 import db_connect
+from app import my_assistant
 
 '''window created (Abhinav Gupta)'''
 window = Tk()
@@ -115,7 +116,7 @@ def login_clicked():
     else:
         if db_connect.check_login(username, password):
             hide_show.show_assistant(window, canvas, wizard, Rectangle_box, ball_1, ball_2, ball_3, ball_4, ball_5, ball_6, signupBtn, login_link,
-                                     reg_username_entry, reg_email_entry, reg_password_entry, backBtn, loginBtn, signup_link, username_entry, password_entry)
+                                     reg_username_entry, reg_email_entry, reg_password_entry, backBtn, loginBtn, signup_link, username_entry, password_entry, github, logoutBtn, micBtn)
 
 
 def signup_clicked():
@@ -138,7 +139,12 @@ def signup_clicked():
     else:
         if (db_connect.check_signup(username, email, password, reg_username_entry)):
             hide_show.show_assistant(window, canvas, wizard, Rectangle_box, ball_1, ball_2, ball_3, ball_4, ball_5, ball_6, signupBtn, login_link,
-                                     reg_username_entry, reg_email_entry, reg_password_entry, backBtn, loginBtn, signup_link, username_entry, password_entry)
+                                     reg_username_entry, reg_email_entry, reg_password_entry, backBtn, loginBtn, signup_link, username_entry, password_entry, github, logoutBtn, micBtn)
+
+
+def logout_clicked():
+    hide_show.show_cover(window, canvas, bot, start_btn, backBtn, username_entry, password_entry, loginBtn, signup_link, signupBtn,
+                         login_link, reg_username_entry, reg_email_entry, reg_password_entry, hero_title, update_img, delete_img, read_img, create_img, logoutBtn)
 
 
 def contribute_github(event):
@@ -159,7 +165,7 @@ start_btn.place(x=435, y=290)
 
 back_btn = ImageTk.PhotoImage(file="images/back.png")
 backBtn = Button(image=back_btn, borderwidth=0,
-                 highlightthickness=0, relief="flat", activebackground='#fff', background='#fff', cursor="hand2", command=lambda: hide_show.show_cover(window, canvas, bot, start_btn, backBtn, username_entry, password_entry, loginBtn, signup_link, signupBtn, login_link, reg_username_entry, reg_email_entry, reg_password_entry, hero_title, update_img, delete_img, read_img, create_img))
+                 highlightthickness=0, relief="flat", activebackground='#fff', background='#fff', cursor="hand2", command=lambda: hide_show.show_cover(window, canvas, bot, start_btn, backBtn, username_entry, password_entry, loginBtn, signup_link, signupBtn, login_link, reg_username_entry, reg_email_entry, reg_password_entry, hero_title, update_img, delete_img, read_img, create_img, logoutBtn))
 
 login_btn = ImageTk.PhotoImage(file="images/login_btn.png")
 loginBtn = Button(image=login_btn, borderwidth=0,
@@ -176,6 +182,14 @@ login_link = Button(image=loginLink, borderwidth=0,
 signup_btn = ImageTk.PhotoImage(file="images/signup_btn.png")
 signupBtn = Button(image=signup_btn, borderwidth=0,
                    highlightthickness=0, relief="flat", activebackground='#fff', background='#fff', cursor="hand2", command=lambda: signup_clicked())
+
+logout_btn = ImageTk.PhotoImage(file="images/logout_btn.png")
+logoutBtn = Button(image=logout_btn, borderwidth=0,
+                   highlightthickness=0, relief="flat", activebackground='#fff', background='#fff', cursor="hand2", command=lambda: logout_clicked())
+
+mic = ImageTk.PhotoImage(file="images/micBtn.png")
+micBtn = Button(image=mic, borderwidth=0,
+                highlightthickness=0, relief="flat", activebackground='#C3ECF6', background='#C3ECF6', cursor="hand2", command=lambda: my_assistant(username_entry.get()))
 
 window.resizable(False, False)
 window.mainloop()

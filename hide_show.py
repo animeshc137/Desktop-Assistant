@@ -29,7 +29,7 @@ def show_login(window, canvas, bot, start_btn, backBtn, username_entry, password
     reg_password_entry.place_forget()
 
 
-def show_cover(window, canvas, bot, start_btn, backBtn, username_entry, password_entry, loginBtn, signup_link, signupBtn, login_link, reg_username_entry, reg_email_entry, reg_password_entry, hero_title, update_img, delete_img, read_img, create_img):
+def show_cover(window, canvas, bot, start_btn, backBtn, username_entry, password_entry, loginBtn, signup_link, signupBtn, login_link, reg_username_entry, reg_email_entry, reg_password_entry, hero_title, update_img, delete_img, read_img, create_img, logoutBtn):
 
     window.title("Desktop Assistant")
     bot.place(x=335, y=355)
@@ -55,6 +55,15 @@ def show_cover(window, canvas, bot, start_btn, backBtn, username_entry, password
     canvas.delete('email')
     login_link.place_forget()
     signupBtn.place_forget()
+    canvas.delete('wizard')
+    canvas.delete('Rectangle_box')
+    canvas.delete('ball_1')
+    canvas.delete('ball_2')
+    canvas.delete('ball_3')
+    canvas.delete('ball_4')
+    canvas.delete('ball_5')
+    canvas.delete('ball_6')
+    logoutBtn.place_forget()
 
 
 def show_signup(window, canvas, username_entry, password_entry, loginBtn, signup_link, signupBtn, login_link, reg_username_entry, reg_email_entry, reg_password_entry, username_img, email, password_img, signup_heading):
@@ -78,7 +87,7 @@ def show_signup(window, canvas, username_entry, password_entry, loginBtn, signup
     reg_password_entry.place(x=572.0, y=440, width=321.0, height=50)
 
 
-def show_assistant(window, canvas, wizard, Rectangle_box, ball_1, ball_2, ball_3, ball_4, ball_5, ball_6, signupBtn, login_link, reg_username_entry, reg_email_entry, reg_password_entry, backBtn, loginBtn, signup_link, username_entry, password_entry):
+def show_assistant(window, canvas, wizard, Rectangle_box, ball_1, ball_2, ball_3, ball_4, ball_5, ball_6, signupBtn, login_link, reg_username_entry, reg_email_entry, reg_password_entry, backBtn, loginBtn, signup_link, username_entry, password_entry, github, logoutBtn, micBtn):
 
     window.title("Desktop Assistant | FiloBot")
     canvas.create_image(500, 220, image=wizard, tag='wizard')
@@ -89,6 +98,8 @@ def show_assistant(window, canvas, wizard, Rectangle_box, ball_1, ball_2, ball_3
     canvas.create_image(790, 330, image=ball_4, tag='ball_4')
     canvas.create_image(950, 150, image=ball_5, tag='ball_5')
     canvas.create_image(200, 350, image=ball_6, tag='ball_6')
+    logoutBtn.place(x=850, y=35)
+    micBtn.place(x=780, y=520)
     signupBtn.place_forget()
     login_link.place_forget()
     reg_username_entry.place_forget()
@@ -109,3 +120,5 @@ def show_assistant(window, canvas, wizard, Rectangle_box, ball_1, ball_2, ball_3
     canvas.delete('password')
     canvas.delete('signup_title')
     canvas.delete('email')
+    canvas.delete('linkImg')
+    github.place_forget()
