@@ -1,6 +1,5 @@
 from voice_recognizer import *
 from os import path, remove
-import db_connect
 
 '''Delete files'''
 

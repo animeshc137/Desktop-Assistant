@@ -1,11 +1,11 @@
-from voice_recognizer import *
+from voice_recognizer import recognizer, engine, sr
 from os import path
-import db_connect
 
 '''Create file'''
 
 
 def create_file(username):
+    print(username)
     global recognizer
 
     print("Bot: What do you want to write onto your file?")
@@ -46,12 +46,12 @@ def create_file(username):
                         if file_present == False:
                             print(username)
 
-                            with open(f"files/{username}/{file_name}", "w") as f:
+                            with open(f"files/{username}/{file_name}", "w+") as f:
                                 f.write(note)
                                 print(
                                     f"Bot: I succesfully created the file {file_name}")
                                 engine.say(
-                                    f"I succesfully created the file {file_name}")
+                                    f"I succesfully created the file {file_name}. What else I can do for you?")
                                 engine.runAndWait()
 
                                 # db_connect.append_filename(username, file_name)
@@ -81,5 +81,15 @@ def create_file(username):
             engine.runAndWait()
 
 
-# username = "abhinav19"
+# username = "1"
+# create_file(username)
+
+# username = 'abhinav19'
+
+
+# def create_file(username):
+#     file_name = 'hello_abhinav.txt'
+#     db_connect.append_filename(username, file_name)
+
+
 # create_file(username)
