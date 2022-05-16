@@ -3,8 +3,7 @@ from voice_recognizer import *
 from datetime import *
 from os import system, path
 import sys
-import db_connect
-import weather
+from weather import weather_report
 import news
 import create_file
 import update_file
@@ -13,11 +12,11 @@ import delete_file
 
 user_name = 'default'
 
-
 '''greetings'''
 
 
 def greetings():
+    print(f'Hello {user_name}, what I can do for you?')
     engine.say(f'Hello {user_name}, what I can do for you?')
     engine.runAndWait()
 
@@ -26,7 +25,6 @@ def greetings():
 
 
 def quit():
-
     print('Bot: See you soon, have a nice day!!')
     engine.say('See you soon, have a nice day!!')
     engine.runAndWait()
@@ -50,7 +48,7 @@ def delete():
 
 
 def weather():
-    weather.weather_report()
+    weather_report()
 
 
 def news():
@@ -70,35 +68,35 @@ mappings = {
 
 
 def my_assistant(username):
-    global recognizer
-    global user_name
+    global recognizer, user_name
 
     user_name = username
 
-    engine.say(f'Hello {user_name}, what I can do for you?')
+    print('Bot: See you soon, have a nice day!!')
+    engine.say(f'Hello {user_name}, what can I do for you?')
     engine.runAndWait()
 
-    # assistant = GenericAssistant(
-    #     'data/intents.json', intent_methods=mappings)
-    # # assistant.train_model()
-    # # assistant.save_model(model_name="data/test_model")
-    # assistant.load_model(model_name="data/test_model")
+    assistant = GenericAssistant(
+        'data/intents.json', intent_methods=mappings)
+    # assistant.train_model()
+    # assistant.save_model(model_name="data/test_model")
+    assistant.load_model(model_name="data/test_model")
 
-    # while True:
-    #     try:
-    #         with sr.Microphone() as mic:
-    #             recognizer.pause_threshold = 0.6
-    #             recognizer.adjust_for_ambient_noise(mic)
-    #             print("Speak: ")
-    #             audio = recognizer.listen(mic)
+    while True:
+        try:
+            with sr.Microphone() as mic:
+                recognizer.pause_threshold = 0.6
+                recognizer.adjust_for_ambient_noise(mic)
+                print("Listening....")
+                audio = recognizer.listen(mic)
 
-    #             message = recognizer.recognize_google(audio, language='en-in')
-    #             message = message.lower()
-    #             print(f"Me: {message}")
+                message = recognizer.recognize_google(audio, language='en-in')
+                message = message.lower()
+                print(f"Me: {message}")
 
-    #         assistant.request(message)
-    #     except sr.UnknownValueError:
-    #         recognizer = sr.Recognizer()
+            assistant.request(message)
+        except sr.UnknownValueError:
+            recognizer = sr.Recognizer()
 
 
-# my_assistant()
+#my_assistant('Animesh')

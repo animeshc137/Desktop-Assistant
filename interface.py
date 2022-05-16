@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import messagebox
+from tkinter import messagebox, scrolledtext
 from tkvideo import *
 import webbrowser
 from PIL import Image, ImageTk
@@ -15,9 +15,11 @@ windowHeight = window.winfo_reqheight()
 positionRight = int(window.winfo_screenwidth()/2 - 982/2)
 positionDown = int(window.winfo_screenheight()/2 - 710/2)
 window.geometry(f"982x629+{positionRight}+{positionDown}")
-window.iconbitmap('images/favicon.ico')
+#window.iconbitmap('images/favicon.ico')
 # window.wm_attributes('-alpha', 0.7)
 window.configure(bg="#fff")
+
+
 canvas = Canvas(window, bg="#fff", height=629, width=982,
                 bd=0, highlightthickness=0, relief="ridge")
 canvas.place(x=0, y=0)
@@ -60,10 +62,10 @@ username_img = ImageTk.PhotoImage(file="images/username.png")
 password_img = ImageTk.PhotoImage(file="images/password.png")
 
 username_entry = Entry(
-    bd=0, bg="#F6F4F4", highlightthickness=0, font=('calibre', 14, 'normal'))
+    bd=0, bg="#EEEAEA", highlightthickness=0, font=('calibre', 14, 'normal'))
 username_entry.focus()
 
-password_entry = Entry(bd=0, bg="#F6F4F4", highlightthickness=0,
+password_entry = Entry(bd=0, bg="#EEEAEA", highlightthickness=0,
                        show='*', font=('calibre', 14, 'normal'))
 
 '''Signup'''
@@ -73,16 +75,19 @@ signup_heading = ImageTk.PhotoImage(file="images/signup_title.png")
 email = ImageTk.PhotoImage(file="images/email.png")
 
 reg_username_entry = Entry(
-    bd=0, bg="#F6F4F4", highlightthickness=0, font=('calibre', 14, 'normal'))
+    bd=0, bg="#EEEAEA", highlightthickness=0, font=('calibre', 14, 'normal'))
 reg_username_entry.focus()
 
-reg_email_entry = Entry(bd=0, bg="#F6F4F4", highlightthickness=0,
+reg_email_entry = Entry(bd=0, bg="#EEEAEA", highlightthickness=0,
                         font=('calibre', 14, 'normal'))
 
-reg_password_entry = Entry(bd=0, bg="#F6F4F4", highlightthickness=0,
+reg_password_entry = Entry(bd=0, bg="#EEEAEA", highlightthickness=0,
                            show='*', font=('calibre', 14, 'normal'))
 
-'''Final Page'''
+'''Assistant Page'''
+
+
+assistant_background = ImageTk.PhotoImage(file="images/assis_background.png")
 
 wizard = ImageTk.PhotoImage(file="images/wizard.png")
 
@@ -101,6 +106,19 @@ ball_5 = ImageTk.PhotoImage(file="images/ball 5.png")
 ball_6 = ImageTk.PhotoImage(file="images/ball 6.png")
 
 
+def practice():
+    hello = 'hello abhinav'
+    text_area.insert(1.0, hello + '\n')
+
+
+text_area = scrolledtext.ScrolledText(
+    window, wrap=WORD, width=50, height=7, font=("calibre", 14, 'normal'), borderwidth=0,
+    highlightthickness=0, relief="flat",  background='#fff')
+
+text_area_btn = Button(window, text='Click me !', bd='5', command=practice)
+# C3ECF6
+
+
 def login_clicked():
     username = username_entry.get()
     password = password_entry.get()
@@ -115,8 +133,8 @@ def login_clicked():
 
     else:
         if db_connect.check_login(username, password):
-            hide_show.show_assistant(window, canvas, wizard, Rectangle_box, ball_1, ball_2, ball_3, ball_4, ball_5, ball_6, signupBtn, login_link,
-                                     reg_username_entry, reg_email_entry, reg_password_entry, backBtn, loginBtn, signup_link, username_entry, password_entry, github, logoutBtn, micBtn)
+            hide_show.show_assistant(window, canvas, wizard, ball_1, ball_2, ball_3, ball_4, ball_5, ball_6, signupBtn, login_link,
+                                     reg_username_entry, reg_email_entry, reg_password_entry, backBtn, loginBtn, signup_link, username_entry, password_entry, github, logoutBtn, micBtn, Rectangle_box, text_area, text_area_btn, assistant_background)
 
 
 def signup_clicked():
@@ -138,8 +156,8 @@ def signup_clicked():
 
     else:
         if (db_connect.check_signup(username, email, password, reg_username_entry)):
-            hide_show.show_assistant(window, canvas, wizard, Rectangle_box, ball_1, ball_2, ball_3, ball_4, ball_5, ball_6, signupBtn, login_link,
-                                     reg_username_entry, reg_email_entry, reg_password_entry, backBtn, loginBtn, signup_link, username_entry, password_entry, github, logoutBtn, micBtn)
+            hide_show.show_assistant(window, canvas, wizard, ball_1, ball_2, ball_3, ball_4, ball_5, ball_6, signupBtn, login_link,
+                                     reg_username_entry, reg_email_entry, reg_password_entry, backBtn, loginBtn, signup_link, username_entry, password_entry, github, logoutBtn, micBtn, Rectangle_box, text_area, text_area_btn, assistant_background)
 
 
 def logout_clicked():
@@ -185,11 +203,11 @@ signupBtn = Button(image=signup_btn, borderwidth=0,
 
 logout_btn = ImageTk.PhotoImage(file="images/logout_btn.png")
 logoutBtn = Button(image=logout_btn, borderwidth=0,
-                   highlightthickness=0, relief="flat", activebackground='#fff', background='#fff', cursor="hand2", command=lambda: logout_clicked())
+                   highlightthickness=0, relief="flat", activebackground='#0E1EFF', background='#0E1EFF', cursor="hand2", command=lambda: logout_clicked())
 
 mic = ImageTk.PhotoImage(file="images/micBtn.png")
 micBtn = Button(image=mic, borderwidth=0,
-                highlightthickness=0, relief="flat", activebackground='#C3ECF6', background='#C3ECF6', cursor="hand2", command=lambda: my_assistant(username_entry.get()))
+                highlightthickness=0, relief="flat", activebackground='#0E1EFF', background='#0E1EFF', cursor="hand2", command=lambda: my_assistant(username_entry.get(), text_area))
 
 window.resizable(False, False)
 window.mainloop()

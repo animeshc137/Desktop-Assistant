@@ -63,6 +63,7 @@ def weather_report():
                 print(f"- Wind: {wind} knot")
                 print(f"- Sunrise: {sunrise} AM")
                 print(f"- Sunset: {sunset} PM\n")
+                # textArea.insert(1.0, temp + '\n')
 
         except sr.UnknownValueError:
             recognizer = sr.Recognizer()
